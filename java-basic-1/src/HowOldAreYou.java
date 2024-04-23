@@ -15,16 +15,33 @@ public class HowOldAreYou {
 		// readLine() は、入出力エラーの可能性がある。エラー処理がないとコンパイルできない。
 		// Java では、 try{ XXXXXXXX } catch(エラーの型 変数) { XXXXXXXXXXXXXXXXXX} と書く
 		try {
-			System.out.println("何歳ですか?");
-			String line = reader.readLine();
-			int age = Integer.parseInt(line);
-			System.out.println("あなたは" + age + "歳ですね。");
-			System.out.println("あなたは10年後、" + (age + 10) + "歳ですね。");
+			while (true) { // 入力がq,eの場合は終了。それ以外は繰り返し入力を行う。
+				System.out.println("何歳ですか?");
+				String line = reader.readLine();
 
-			// 誕生年から元号を表示する
-			int birthYear = 2024 - age;
-			String era = getEra(birthYear);
-			System.out.println("あなたが誕生した年の元号は" + era + "年です。");
+				// 入力がq,eの場合は終了
+				if (line.equals("q") || line.equals("e")) {
+					System.out.println("終了しました。");
+					break;
+				}
+
+				int age = Integer.parseInt(line);
+
+				// 入力した現在の年齢がマイナスおよび120歳以上の場合は再入力を促す。
+				if (age > 120 || age < 1) {
+					System.out.println("再入力してください。");
+					continue;
+				}
+
+				System.out.println("あなたは" + age + "歳です。");
+				System.out.println("あなたは10年後、" + (age + 10) + "歳です。");
+
+				// 誕生年から元号を表示する
+				int birthYear = 2024 - age;
+				String era = getEra(birthYear);
+				System.out.println("あなたが誕生した年の元号は" + era + "年です。");
+				System.out.println();
+			}
 		} catch (IOException e) {
 			System.out.println(e);
 		}
