@@ -13,6 +13,7 @@ public class NetproLabMember {
 
         // 2次元配列の作成
         int[][] hairetu = new int[years][columns];
+        double notProbabilityGirls15Years = 1.0; // 15年間の女子学生が来ない確率
 
         for (int i = 0; i < years; i++) {
             // 学生総数の推移
@@ -23,16 +24,27 @@ public class NetproLabMember {
             iwaiKenStudent += random.nextInt(6) - 3; // +-3人のランダム性で推移
 
             hairetu[i][0] = tduStudent; // 年ごとの学生総数
-            hairetu[i][1] = (int) tduGirlsRate; // 年ごとの女子学生の割合
+            hairetu[i][1] = (int) (tduGirlsRate * 100); // 年ごとの女子学生の割合（割合をパーセンテージに変換）
             hairetu[i][2] = iwaiKenStudent; // 年ごとの岩井研の配属人数
 
-            // 岩井研に来る学生が女子学生である確率を計算
-            double girlsRate = tduGirlsRate;
-            double notProbabilityGirls = 1.0;
-            for (int j = 0; j < iwaiKenStudent; j++) {
-                notProbabilityGirls *= (1 - girlsRate);
+            double notProbabilityGirlsYear = 1.0; // その年の女子学生が来ない確率
+
+            for (int j = 0; j < hairetu[i][2]; j++) {
+                int girls = hairetu[i][0] * hairetu[i][1] / 100; // その年の女子学生の人数
+                int mens = hairetu[i][0] - girls; // その年の男子学生の人数
+
+                // 選ばれた人が男子学生である確率
+                double maleOnlyProbability = (double) mens / hairetu[i][0];
+
+                notProbabilityGirlsYear *= maleOnlyProbability;
+
+                // その年の男子学生の数を1人減らす。
+                mens -= 1;
             }
-            System.out.println((i + 1) + "年目は" + notProbabilityGirls + " の確率で岩井研に女子学生が来ない");
+
+            // 15年間ずっと男性しか選べない確率を更新
+            notProbabilityGirls15Years *= notProbabilityGirlsYear;
         }
+        System.out.println("15年間岩井研に女子学生が来ない確率：" + notProbabilityGirls15Years);
     }
 }
