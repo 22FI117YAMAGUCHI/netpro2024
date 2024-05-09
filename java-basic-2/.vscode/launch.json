@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "HeikinCKadai",
+            "request": "launch",
+            "mainClass": "HeikinCKadai",
+            "projectName": "java-basic-2_f37fee5b"
+        },
+        {
+            "type": "java",
+            "name": "HeikinA",
+            "request": "launch",
+            "mainClass": "kadai.HeikinA",
+            "projectName": "java-basic-2_f37fee5b"
+        },
+        {
+            "type": "java",
+            "name": "XmasTree",
+            "request": "launch",
+            "mainClass": "kadai.XmasTree",
+            "projectName": "java-basic-2_f37fee5b"
+        },
+        {
+            "type": "java",
             "name": "MyExceptionTest",
             "request": "launch",
             "mainClass": "MyExceptionTest",

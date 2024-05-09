@@ -1,4 +1,3 @@
-package kadai;
 public class HeikinA {
 	public static void main(String[] args){
 
