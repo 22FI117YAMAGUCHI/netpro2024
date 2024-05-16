@@ -11,7 +11,7 @@ public class Client {
         try {
             // 1. サーバーに接続するためのSocketを作成
             // hostに岩井のやつ打つ
-            Socket socket = new Socket("133.20.69.215", 5050);
+            Socket socket = new Socket("localhost", 5050);
             //大学とwifiは学生同士の通信を認めていないため
             //"サーバーのIPアドレス"は"localhost" //ポート番号は5050などを利用しよう
 
