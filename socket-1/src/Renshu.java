@@ -118,4 +118,73 @@ class Renshu {
         }
         return true;
     }
+
+    // バブルソートを実行する関数
+    public void bubbleSort(int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = array.length - 1; i < j; j--) {
+                if (array[j - 1] > array[j]) {
+                    int tmp = array[j - 1];
+                    array[j - 1] = array[j];
+                    array[j] = tmp;
+                }
+            }
+        }
+    }
+
+    // クイックソートを実行する関数
+    public void quickSort(int[] array) {
+        quicksort(array, 0, array.length - 1);
+    }
+
+    private void quicksort(int[] array, int l, int r) {
+        // 整列する要素が一つならなにもしない
+        if (l >= r)
+            return;
+
+        // ピボットvを基準に分割
+        int v = partition(array, l, r);
+
+        // 左の部分をソート
+        quicksort(array, l, v - 1);
+
+        // 右の部分をソート
+        quicksort(array, v + 1, r);
+    }
+
+    private int partition(int[] array, int l, int r) {
+        // 右端の要素をピボットとする。
+        int pivot = array[r];
+
+        // ポインタiとjを初期化する
+        int i = l - 1;
+        int j = r;
+
+        while (true) {
+            // ポインタiを右に進める
+            while (array[++i] < pivot)
+                ;
+
+            // ポインタjを左へ進める
+            while (l < j && pivot < array[--j])
+                ;
+
+            // ポイントiとjがぶつかったらループ抜ける
+            if (i >= j)
+                break;
+
+            // iの要素とjの要素を交換する
+            int tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+        }
+
+        // a[i]とピボットを交換する
+        int tmp = array[i];
+        array[i] = array[r];
+        array[r] = tmp;
+
+        return i;
+
+    }
 }
